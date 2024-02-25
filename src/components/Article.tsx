@@ -25,10 +25,10 @@ const Article = () => {
             {!loading && !error && (
                 <div >
                     <h1 className='mb-2 font-bold text-3xl pb-2 text-slate-300'>About the Article</h1>
-                    <div className='rounded-lg p-20 overflow-hidden shadow-xl bg-slate-700 bg-opacity-50 text-slate-300'>
-                        <h2 className='font-bold text-xl pb-5'>{article[0]?.title}</h2>
+                    <div className='rounded-lg p-20 overflow-hidden shadow-xl bg-slate-700 bg-opacity-50 text-slate-300 border border-yellow-300/20'>
+                        <h2 className='font-bold text-xl pb-5 text-yellow-200'>{article[0]?.title}</h2>
                         <h3 className='m-2 font-semibold text-justify text-lg'>Summary: {article[0]?.summary}</h3>
-                        <div className=' bg-slate-200/10 rounded-lg p-5'>
+                        <div className=' bg-slate-200/10 rounded-lg p-5 border border-yellow-300/20'>
                             <p className='m-2 text-justify text-slate-300'>{article[0]?.fullText}</p>
                         </div>
                         <button className="bg-slate-300 rounded-lg p-2 m-2 font-mono text-black" onClick={() => navigate('/')}>Go home</button>
