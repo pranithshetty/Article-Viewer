@@ -2,9 +2,12 @@
 
 An application that displays articles.
 
+View the application here:
+- https://article-viewer-fawn.vercel.app/
+
 ## Tech Stack
 
-**Client:** React, Redux-Toolkit, TailwindCSS,Axios, React-Router
+React, Redux-Toolkit, TailwindCSS, Axios, React-Router
 
 ## Features
 
