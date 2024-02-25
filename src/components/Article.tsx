@@ -1,46 +1,32 @@
-// ArticleDetails.tsx
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ARTICLE_LIST_API } from '../utils/constants'
-
-interface Article {
-    id: number;
-    title: string;
-    content: string;
-}
+import { fetchArticles } from '../store/articleSlice';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import ArticleError from './ArticleError';
 
 const Article = () => {
     const { id } = useParams<{ id: string }>();
-    const [article, setArticle] = useState<Article | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<boolean>(false);
+    const dispatch = useAppDispatch()
+    const { data: articles, loading, error } = useAppSelector((state) => state.articles);
+
+    const article = articles.find((article) => {
+        return article.id === id
+    });
+
 
     useEffect(() => {
-        fetchArticle();
-    }, []);
-
-    const fetchArticle = async () => {
-        try {
-            const response = await fetch(`${ARTICLE_LIST_API}/${id}`);
-            const data = await response.json();
-            setArticle(data);
-            setLoading(false);
-        } catch (error) {
-            console.log("My errs", error);
-            setError(true);
-            setLoading(false);
-        }
-    };
+        dispatch(fetchArticles());
+    }, [dispatch]);
 
     return (
         <div>
             <h1>Article Details</h1>
             {loading && <p>Loading...</p>}
-            {error && <p>OOPS</p>}
-            {!loading && !error && article?.title && (
+            {error && <ArticleError error={error} />}
+            {!loading && !error && (
                 <div>
                     <h2>{article?.title}</h2>
-                    <p>{article?.content}</p>
+                    <p>{article?.summary}</p>
                 </div>
             )}
         </div>
