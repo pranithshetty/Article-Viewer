@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchArticles } from '../store/articleSlice';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
+// { fetchArticles } from '../store/articleSlice';
+//import { useAppDispatch } from '../store/hooks';
+import { useAppSelector } from '../store/hooks';
 import ArticleError from './ArticleError';
 
 const Article = () => {
