@@ -7,6 +7,7 @@ interface Article {
 	id: string;
 	title: string;
 	summary?: string;
+	fullText?: string | null;
 }
 //inetial state type
 interface InetialState {
@@ -35,6 +36,15 @@ export const fetchArticles = createAsyncThunk("articles/fetchArticles", () => {
 	});
 });
 
+export const fetchArticleDetails = createAsyncThunk(
+	"articles/fetchArticleDetails",
+	(id: string | undefined) => {
+		return axios.get(ARTICLE_LIST_API + `/${id}`).then((response) => {
+			return [response.data];
+		});
+	}
+);
+
 const articlesSlice = createSlice({
 	name: "articles",
 	initialState,
@@ -54,6 +64,24 @@ const articlesSlice = createSlice({
 				}
 			)
 			.addCase(fetchArticles.rejected, (state, action) => {
+				state.loading = false;
+				state.error =
+					(action.error.message as string) || "Something went wrong!";
+				//state.data = cachedArticles;
+			})
+			.addCase(fetchArticleDetails.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(
+				fetchArticleDetails.fulfilled,
+				(state, action: PayloadAction<Article[]>) => {
+					state.loading = false;
+					state.data = action.payload;
+					state.error = null;
+				}
+			)
+			.addCase(fetchArticleDetails.rejected, (state, action) => {
 				state.loading = false;
 				state.error =
 					(action.error.message as string) || "Something went wrong!";
