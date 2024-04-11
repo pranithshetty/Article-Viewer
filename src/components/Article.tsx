@@ -15,27 +15,29 @@ const Article = () => {
 
     useEffect(() => {
         dispatch(fetchArticleDetails(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     return (
-        <div className='h-screen flex items-center justify-center flex-col'>
-
-            {loading && <p className='font-mono font-bold text-lg text-slate-200'>Loading...</p>}
-            {error && <ArticleError error={error} />}
-            {!loading && !error && (
-                <div >
-                    <h1 className='mb-2 font-bold text-3xl pb-2 text-slate-300'>About the Article</h1>
-                    <div className='rounded-lg p-20 overflow-hidden shadow-xl bg-slate-700 bg-opacity-50 text-slate-300 border border-yellow-300/20'>
-                        <h2 className='font-bold text-xl pb-5 text-yellow-200'>{article[0]?.title}</h2>
-                        <h3 className='m-2 font-semibold text-justify text-lg'>Summary: {article[0]?.summary}</h3>
-                        <div className=' bg-slate-200/10 rounded-lg p-5 border border-yellow-300/20'>
-                            <p className='m-2 text-justify text-slate-300'>{article[0]?.fullText}</p>
+        <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-blue-800 to-cyan-400'>
+            <div className='w-full px-4'>
+                {loading && <p className='font-mono font-bold text-lg text-gray-200 text-center'>Loading...</p>}
+                {error && <ArticleError error={error} />}
+                {!loading && !error && (
+                    <div className='bg-gray-900 bg-opacity-50 text-gray-300 rounded-lg overflow-hidden shadow-xl border border-yellow-300/20'>
+                        <h1 className='mb-4 font-bold text-2xl px-4 py-2 bg-gray-800 bg-opacity-50 text-center'>About the Article</h1>
+                        <div className='p-4'>
+                            <h2 className='font-bold text-xl pb-2 text-yellow-200'>{article[0]?.title}</h2>
+                            <h3 className='font-semibold text-lg pb-2'>Summary:</h3>
+                            <p className='text-justify text-gray-300 pb-4'>{article[0]?.summary}</p>
+                            <h3 className='font-semibold text-lg pb-2'>Full Text:</h3>
+                            <p className='text-justify text-gray-300'>{article[0]?.fullText}</p>
+                            <div className='flex justify-center'>
+                                <button className="bg-gray-300 rounded-lg py-2 px-4 mt-4 font-mono text-black w-full sm:w-auto" onClick={() => navigate('/')}>Go home</button>
+                            </div>
                         </div>
-                        <button className="bg-slate-300 rounded-lg p-2 m-2 font-mono text-black" onClick={() => navigate('/')}>Go home</button>
                     </div>
-
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };

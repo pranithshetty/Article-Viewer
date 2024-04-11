@@ -22,16 +22,9 @@ const initialState: InetialState = {
 	error: null,
 };
 
-//let cachedArticles: Article[] = [];
-
 //fetch the article list|| generates pending,fullfiled and rejected action types
 export const fetchArticles = createAsyncThunk("articles/fetchArticles", () => {
-	// return cachedArticles.length
-	// 	? cachedArticles
-	// 	:
 	return axios.get(ARTICLE_LIST_API).then((response) => {
-		//cachedArticles = response.data;
-		//localStorage.setItem('articles',response.data)
 		return response.data;
 	});
 });

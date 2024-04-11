@@ -13,12 +13,14 @@ const ArticleList = () => {
     }, [dispatch]);
 
     return (
-        <div className='h-full flex items-center justify-center'>
+        <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-blue-800 to-cyan-400'>
             {loading && <p className='h-screen font-mono font-bold text-lg text-slate-200'>Loading...</p>}
             {error && <ArticleError error={error} />}
             {!loading && !error && (
                 <div className='h-full'>
-                    <h1 className='font-bold text-3xl mb-2 text-slate-300'>Articles</h1>
+                    <div className='flex justify-center'>
+                        <h1 className='font-bold text-3xl mb-2 text-slate-300 items-center'>Articles</h1>
+                    </div>
                     <div className='h-fit grid grid-cols-1 gap-1 sm:grid-cols-4 md:max-xl:grid-cols-2'>
                         {articles.map((article: any) => (
                             <Link to={`/article/${article.id}`} key={article.id}>
